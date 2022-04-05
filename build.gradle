@@ -10,7 +10,8 @@ javafx {
 
 group 'com.kodilla'
 version '1.0-SNAPSHOT'
-mainClassName = 'com.kodilla.blackjack.BlackJack'
+mainClassName = 'com.kodilla.Tic_Tac_Toe.TicTacToe'
+
 
 repositories {
     mavenCentral()
