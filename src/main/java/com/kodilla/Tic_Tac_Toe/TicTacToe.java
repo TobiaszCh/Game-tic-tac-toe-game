@@ -11,6 +11,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +26,6 @@ public class TicTacToe extends Application {
     Random random = new Random();
     private boolean easyLevel = false;
     private boolean mediumLevel = false;
-//    private boolean hardLevel = false;
     private boolean playerss = false;
     private String p1;
     private boolean endRound = true;
@@ -34,14 +35,12 @@ public class TicTacToe extends Application {
     private int score1 = 0;
     private int tie = 0;
 
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-
 
         Button newGame = new Button("New game");
         newGame.setOnAction(event -> {
@@ -133,13 +132,6 @@ public class TicTacToe extends Application {
         medium.setPrefSize(300,50);
         medium.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 
-/*        Button hard = new Button("Hard");
-        hard.setOnAction(event -> {
-            hardLevel = true;
-            primaryStage.setScene(scene);
-        });
-        hard.setPrefSize(300,50);
-        hard.setFont(Font.font("Arial", FontWeight.BOLD, 18));*/
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(players ,easy, medium);
@@ -152,7 +144,7 @@ public class TicTacToe extends Application {
 
         primaryStage.setTitle("TicTacToe");
         primaryStage.setScene(main);
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(true);
         primaryStage.show();
 
@@ -160,6 +152,7 @@ public class TicTacToe extends Application {
 
     public void handle(ActionEvent event) {
         for (int i = 0; i < 9; i++) {
+
             if (buttons.get(i) == event.getSource()) {
                  if (easyLevel) {
                     buttons.get(i).signX();
@@ -169,6 +162,7 @@ public class TicTacToe extends Application {
                         checkScore();
                     }
                 }
+
                 else if (mediumLevel) {
                     buttons.get(i).signX();
                     checkScore();
@@ -177,14 +171,7 @@ public class TicTacToe extends Application {
                         checkScore();
                     }
                 }
- /*               else if (hardLevel) {
-                    buttons.get(i).signX();
-                    checkScore();
-                     if (endRound) {
-                         hardLevel();
-                         checkScore();
-                     }
-                }*/
+
                 else if (playerss) {
                     buttons.get(i).signX();
                     checkScore();
@@ -193,6 +180,7 @@ public class TicTacToe extends Application {
                         checkScore();
                     }
                 }
+
                 else {
                     buttons.get(i).signO();
                     checkScore();
@@ -211,10 +199,12 @@ public class TicTacToe extends Application {
         for (int i = 0; i < 3; i++) {
 
             if (buttons.get(a).getText().equals(buttons.get(a + 1).getText()) && buttons.get(a).getText().equals(buttons.get(a + 2).getText()) && !Objects.equals(buttons.get(a).getText(), empty)) {
+
                 if (Objects.equals(buttons.get(a).getText(), "X")) {
                     p1 = "You win ";
                     score++;
                 }
+
                 else if (Objects.equals(buttons.get(a).getText(), "O")) {
                     if (easyLevel || mediumLevel) {
                         p1 = "The computer wins ";
@@ -226,16 +216,18 @@ public class TicTacToe extends Application {
                 }
                 endRound();
                 endRound = false;
+
                 for (int j = 0; j < 9; j++) {
                     buttons.get(j).setDisable(true);
-
                 }
             }
+
             if (buttons.get(i).getText().equals(buttons.get(b + 3).getText()) && buttons.get(i).getText().equals(buttons.get(b + 6).getText()) && !Objects.equals(buttons.get(i).getText(), empty)) {
                 if (Objects.equals(buttons.get(i).getText(), "X")) {
                     p1 = "You win ";
                     score++;
                 }
+
                 else if (Objects.equals(buttons.get(i).getText(), "O")) {
                     if (easyLevel || mediumLevel) {
                         p1 = "The computer wins ";
@@ -247,20 +239,22 @@ public class TicTacToe extends Application {
                 }
                 endRound();
                 endRound = false;
+
                 for (int j = 0; j < 9; j++) {
                     buttons.get(j).setDisable(true);
-
                 }
             }
+
             a = a + 3;
             b++;
-
         }
+
         if (buttons.get(0).getText().equals(buttons.get(4).getText()) && buttons.get(0).getText().equals(buttons.get(8).getText()) && !Objects.equals(buttons.get(0).getText(), empty)) {
             if (Objects.equals(buttons.get(0).getText(), "X")) {
                 p1 = "You win ";
                 score++;
             }
+
             else if (Objects.equals(buttons.get(0).getText(), "O")) {
                 if (easyLevel || mediumLevel) {
                     p1 = "The computer wins ";
@@ -272,19 +266,24 @@ public class TicTacToe extends Application {
             }
             endRound();
             endRound = false;
+
             for (int j = 0; j < 9; j++) {
                 buttons.get(j).setDisable(true);
             }
         }
+
         if (buttons.get(2).getText().equals(buttons.get(4).getText()) && buttons.get(2).getText().equals(buttons.get(6).getText()) && !Objects.equals(buttons.get(2).getText(), empty)) {
             if (Objects.equals(buttons.get(2).getText(), "X")) {
                 p1 = "You win ";
                 score++;
             }
+
             else if (Objects.equals(buttons.get(2).getText(), "O")) {
+
                 if (easyLevel || mediumLevel) {
                     p1 = "The computer wins ";
                 }
+
                 else {
                     p1 = "Your friend wins ";
                 }
@@ -294,15 +293,17 @@ public class TicTacToe extends Application {
             endRound = false;
             for (int j = 0; j < 9; j++) {
                 buttons.get(j).setDisable(true);
-
             }
         }
+
         int c = 0;
         for (int i = 0; i < 9 ; i++) {
+
             if (!Objects.equals(buttons.get(i).getText(), empty)) {
                 c++;
             }
         }
+
         if (c ==9 && endRound1) {
             endRound = false;
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -312,8 +313,8 @@ public class TicTacToe extends Application {
             tie++;
 
         }
-
     }
+
     public void easyLevel() {
         for (int i = 0; i < 9; i++) {
             if (!Objects.equals(buttons.get(i).getText(), "X") && !Objects.equals(buttons.get(i).getText(), "O")) {
@@ -322,6 +323,7 @@ public class TicTacToe extends Application {
             }
         }
     }
+
     public void mediumLevel() {
         int a = 0;
         int b = 0;
@@ -391,163 +393,12 @@ public class TicTacToe extends Application {
         }
     }
 
- /*   public void hardLevel() {
-
-        if (levelStop) {
-            int s = 0;
-            for (int i = 0; i < 9; i++) {
-                if (Objects.equals(buttons.get(i).getText(), empty) && !(Objects.equals(buttons.get(4).getText(), "X"))) {
-                    s++;
-                }
-            }
-            if (s == 8) {
-                buttons.get(4).signO();
-            } else if ((Objects.equals(buttons.get(4).getText(), "X") && (Objects.equals(buttons.get(0).getText(), empty)))) {
-                buttons.get(0).signO();
-            }
-            levelStop = false;
-        }
-        int a = 0;
-        int b = 0;
-        for (int i = 0; i < 3; i++) {
-
-            if (Objects.equals(buttons.get(a).getText(), empty) || Objects.equals(buttons.get(a + 1).getText(), empty) || Objects.equals(buttons.get(a + 2).getText(), empty)) {
-                if (Objects.equals(buttons.get(a).getText(), empty) && Objects.equals(buttons.get(a + 1).getText(), "O") && Objects.equals(buttons.get(a + 2).getText(), "O")) {
-                    buttons.get(a).signO();
-                } else if (Objects.equals(buttons.get(a).getText(), empty) && !Objects.equals(buttons.get(a + 1).getText(), empty) && !Objects.equals(buttons.get(a + 2).getText(), empty)) {
-                    buttons.get(a).signO();
-                }
-                else {
-                    easyLevel();
-                }
-            }
-
-            } else if (Objects.equals(buttons.get(a + 1).getText(), empty) && Objects.equals(buttons.get(a).getText(), "O") && Objects.equals(buttons.get(a + 2).getText(), "O")) {
-                buttons.get(a + 1).signO();
-                levelStop = false;
-
-            } else if (Objects.equals(buttons.get(a + 2).getText(), empty) && Objects.equals(buttons.get(a).getText(), "O") && Objects.equals(buttons.get(a + 1).getText(), "O")) {
-                buttons.get(a + 2).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(i).getText(), empty) && Objects.equals(buttons.get(b + 3).getText(), "O") && Objects.equals(buttons.get(b + 6).getText(), "O")) {
-                buttons.get(i).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(b + 3).getText(), empty) && Objects.equals(buttons.get(i).getText(), "O") && Objects.equals(buttons.get(b + 6).getText(), "O")) {
-                buttons.get(b + 3).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(b + 6).getText(), empty) && Objects.equals(buttons.get(i).getText(), "O") && Objects.equals(buttons.get(b + 3).getText(), "O")) {
-                buttons.get(b + 6).signO();
-                levelStop = false;
-            }
-            a = a + 3;
-            b++;
-        }
-
-        if (Objects.equals(buttons.get(0).getText(), empty) && Objects.equals(buttons.get(4).getText(), "O") && Objects.equals(buttons.get(8).getText(), "O")) {
-            buttons.get(0).signO();
-            levelStop = false;
-        } else if (Objects.equals(buttons.get(4).getText(), empty) && Objects.equals(buttons.get(0).getText(), "O") && Objects.equals(buttons.get(8).getText(), "O")) {
-            buttons.get(4).signO();
-            levelStop = false;
-        } else if (Objects.equals(buttons.get(8).getText(), empty) && Objects.equals(buttons.get(0).getText(), "O") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(8).signO();
-            levelStop = false;
-        } else if (Objects.equals(buttons.get(2).getText(), empty) && Objects.equals(buttons.get(4).getText(), "O") && Objects.equals(buttons.get(6).getText(), "O")) {
-            buttons.get(2).signO();
-            levelStop = false;
-        } else if (Objects.equals(buttons.get(4).getText(), empty) && Objects.equals(buttons.get(2).getText(), "O") && Objects.equals(buttons.get(6).getText(), "O")) {
-            buttons.get(4).signO();
-            levelStop = false;
-        } else if (Objects.equals(buttons.get(6).getText(), empty) && Objects.equals(buttons.get(2).getText(), "O") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(6).signO();
-            levelStop = false;
-        }
-        a = 0;
-        b = 0;
-
-            for (int i = 0; i < 3; i++) {
-
-                if (Objects.equals(buttons.get(a).getText(), empty) && !Objects.equals(buttons.get(a + 1).getText(), empty) && !Objects.equals(buttons.get(a + 2).getText(), empty)) {
-                    buttons.get(a).signO();
-                    levelStop = false;
-
-                } else if (Objects.equals(buttons.get(a + 1).getText(), empty) && !Objects.equals(buttons.get(a).getText(), empty) && !Objects.equals(buttons.get(a + 2).getText(), empty)) {
-                    buttons.get(a + 1).signO();
-                    levelStop = false;
-
-                } else if (Objects.equals(buttons.get(a + 2).getText(), empty) && !Objects.equals(buttons.get(a).getText(), empty) && !Objects.equals(buttons.get(a + 1).getText(), empty)) {
-                    buttons.get(a + 2).signO();
-                    levelStop = false;
-                } else if (Objects.equals(buttons.get(i).getText(), empty) && !Objects.equals(buttons.get(b + 3).getText(), empty) && !Objects.equals(buttons.get(b + 6).getText(), empty)) {
-                    buttons.get(i).signO();
-                    levelStop = false;
-                } else if (Objects.equals(buttons.get(b + 3).getText(), empty) && !Objects.equals(buttons.get(i).getText(), empty) && !Objects.equals(buttons.get(b + 6).getText(), empty)) {
-                    buttons.get(b + 3).signO();
-                    levelStop = false;
-                } else if (Objects.equals(buttons.get(b + 6).getText(), empty) && !Objects.equals(buttons.get(i).getText(), empty) && !Objects.equals(buttons.get(b + 3).getText(), empty)) {
-                    buttons.get(b + 6).signO();
-                    levelStop = false;
-                }
-                a = a + 3;
-                b++;
-            }
-
-
-            if (Objects.equals(buttons.get(0).getText(), empty) && !Objects.equals(buttons.get(4).getText(), empty) && !Objects.equals(buttons.get(8).getText(), empty)) {
-                buttons.get(0).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(4).getText(), empty) && !Objects.equals(buttons.get(0).getText(), empty) && !Objects.equals(buttons.get(8).getText(), empty)) {
-                buttons.get(4).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(8).getText(), empty) && !Objects.equals(buttons.get(0).getText(), empty) && !Objects.equals(buttons.get(4).getText(), empty)) {
-                buttons.get(8).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(2).getText(), empty) && !Objects.equals(buttons.get(4).getText(), empty) && !Objects.equals(buttons.get(6).getText(), empty)) {
-                buttons.get(2).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(4).getText(), empty) && !Objects.equals(buttons.get(2).getText(), empty) && !Objects.equals(buttons.get(6).getText(), empty)) {
-                buttons.get(4).signO();
-                levelStop = false;
-            } else if (Objects.equals(buttons.get(6).getText(), empty) && !Objects.equals(buttons.get(2).getText(), empty) && !Objects.equals(buttons.get(4).getText(), empty)) {
-                buttons.get(6).signO();
-                levelStop = false;
-            }
-
-/*        if (Objects.equals(buttons.get(1).getText(), "X") && Objects.equals(buttons.get(3).getText(), empty) && Objects.equals(buttons.get(7).getText(), empty)
-                && Objects.equals(buttons.get(5).getText(), "X") && Objects.equals(buttons.get(4).getText(), "O")){
-            buttons.get(0).signO();
-        }
-        else if (Objects.equals(buttons.get(5).getText(), "X") && Objects.equals(buttons.get(1).getText(), empty) && Objects.equals(buttons.get(3).getText(), empty)
-                && Objects.equals(buttons.get(7).getText(), "X") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(0).signO();
-        }
-        else if (Objects.equals(buttons.get(7).getText(), "X") && Objects.equals(buttons.get(5).getText(), empty) && Objects.equals(buttons.get(1).getText(), empty)
-                && Objects.equals(buttons.get(3).getText(), "X") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(0).signO();
-        }
-        else if (Objects.equals(buttons.get(3).getText(), "X") && Objects.equals(buttons.get(7).getText(), empty) && Objects.equals(buttons.get(5).getText(), empty)
-                && Objects.equals(buttons.get(1).getText(), "X") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(0).signO();
-        }
-        else if (Objects.equals(buttons.get(1).getText(), "X") && Objects.equals(buttons.get(3).getText(), empty) && Objects.equals(buttons.get(5).getText(), empty)
-                && Objects.equals(buttons.get(7).getText(), "X") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(0).signO();
-        }
-        else if (Objects.equals(buttons.get(3).getText(), "X") && Objects.equals(buttons.get(1).getText(), empty) && Objects.equals(buttons.get(7).getText(), empty)
-                && Objects.equals(buttons.get(5).getText(), "X") && Objects.equals(buttons.get(4).getText(), "O")) {
-            buttons.get(0).signO();
-        }
-
-
-        }*/
-
     public void endRound() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Winner");
         alert.setHeaderText(p1 + "this round!");
         alert.show();
         endRound1 = false;
-
     }
 }
 
